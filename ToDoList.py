@@ -7,7 +7,26 @@ def save_to_file(filename='task.txt'):
         for number, task in tasks.items():
             file.write(f'{number}:{task}')
             print('The task has been added successfully')
-            
+
+def load_from_file(filename='task.txt'):
+    tasks.clear()
+    global task_number
+    try:
+        with open(filename, 'r') as file:
+            for line in file:
+                number_str, task=line.strip().split(':',1)
+                try:
+                    number=int(number_str)
+                    tasks[number]=task
+                    if number>=task_number:
+                        task_number=number+1
+                except ValueError:
+                    print(f'Warning!! Skipping some values in file{line.strip()}')
+
+    except FileNotFoundError:
+        print(f'Warning!! File {filename}not foud. Starting task from an empty list')
+
+
 def add_task():
     global task_number
     task=input('Enter the task you want to add')
