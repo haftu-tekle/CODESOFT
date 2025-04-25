@@ -8,23 +8,26 @@ def save_to_file(filename='task.txt'):
             file.write(f'{number}:{task}')
             print('The task has been added successfully')
 
+# def load_from_file(filename='task.txt'):
+#     tasks.clear()
+#     global task_number
+#     try:
+#         with open(filename, 'r') as file:
+#             for line in file:
+#                 number_str, task=line.strip().split(':',1)
+#                 try:
+#                     number=int(number_str)
+#                     tasks[number]=task
+#                     if number>=task_number:
+#                         task_number=number+1
+#                 except ValueError:
+#                     print(f'Warning!! Skipping some values in file{line.strip()}')
+
+    # except FileNotFoundError:
+    #     print(f'Warning!! File {filename}not foud. Starting task from an empty list')
 def load_from_file(filename='task.txt'):
     tasks.clear()
-    global task_number
-    try:
-        with open(filename, 'r') as file:
-            for line in file:
-                number_str, task=line.strip().split(':',1)
-                try:
-                    number=int(number_str)
-                    tasks[number]=task
-                    if number>=task_number:
-                        task_number=number+1
-                except ValueError:
-                    print(f'Warning!! Skipping some values in file{line.strip()}')
 
-    except FileNotFoundError:
-        print(f'Warning!! File {filename}not foud. Starting task from an empty list')
 
 
 def add_task():
@@ -73,7 +76,9 @@ if __name__=='__main__':
         choice=int(input('Enter an action from above'))
         if choice==1:
             add_task()
+            save_to_file(add_task)
         elif choice==2:
+             load_from_file()
              view_task()
         elif choice==3:
             delete_task()
