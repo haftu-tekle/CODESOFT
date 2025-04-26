@@ -1,12 +1,9 @@
 
 import sys
-tasks={}
+task={}
 task_number=1
 def save_to_file(filename='task.txt'):
-    with open(filename, 'w') as file:
-        for number, task in tasks.items():
-            file.write(f'{number}:{task}')
-            print('The task has been added successfully')
+    with 
 def load_from_file(filename='task.txt'):
     tasks.clear()
     global task_number
@@ -38,11 +35,20 @@ def delete_from_file(task_number_to_be_deleted, filename='task.txt'):
                     update_tasks[number]=task
                 else:
                     task_deleted=True
+        with open(filename, 'r') as file:
+            for number, task in sorted(update_tasks.items()):
+                file.write(f'{number}:{task}')
+            task_number=len(update_tasks) if update_tasks else 0
+            if task_deleted:
+                print(f'{task_number_to_be_deleted} is deleted successfully')
+            else:
+                print(f'{task_number_to_be_deleted} doesnot exist')
 
 
     except ValueError:
         print(f'Warning!: Skipping invalid values in line{line.strip()}')
-
+    except FileNotFoundError:
+        print(f'File name {filename} not found')
 
 
 def add_task():
