@@ -24,16 +24,24 @@ def load_from_file(filename='task.txt'):
                     print(f'Warning: skipping values in file{line.strip()}')
     except FileNotFoundError:
         print(f'file named{filename} not found')
-def delete_from_file(task_number_to_be_deleted_, filename='task.txt'):
+def delete_from_file(task_number_to_be_deleted, filename='task.txt'):
+    update_tasks={}
     global task_number
     tasks.clear()
+    task_deleted=False
     try:
         with open(filename, 'r') as file:
             for line in file:
                 numbr_str, task=line.strip().split(':',1)
+                number=int(numbr_str)
+                if number!=task_number_to_be_deleted:
+                    update_tasks[number]=task
+                else:
+                    task_deleted=True
 
 
-    except:
+    except ValueError:
+        print(f'Warning!: Skipping invalid values in line{line.strip()}')
 
 
 
