@@ -13,24 +13,9 @@ def save_to_file(filename='task.txt'):
         tasks.clear()
         tasks.update(updated_task)
         print(f'The file {filename} has been saved successfully!')
-
 def load_from_file(filename='task.txt'):
-    tasks.clear()
-    global task_number
-    try:
-        with open (filename, 'r') as file:
-            for line in file:
-                number_str, task=line.strip().split(':',1)
-                try:
-                    number=int(number_str)
-                    tasks[number]=task
-                    if number>=task_number:
-                        task_number=1+number
-                except ValueError:
+    task.c
 
-                    print(f'Warning: skipping values in file{line.strip()}')
-    except FileNotFoundError:
-        print(f'file named{filename} not found')
 def delete_from_file(task_number_to_be_deleted, filename='task.txt'):
     update_tasks={}
     global task_number
