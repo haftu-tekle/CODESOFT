@@ -1,9 +1,19 @@
 
 import sys
-task={}
+tasks={}
 task_number=1
 def save_to_file(filename='task.txt'):
-    with 
+    global task_number
+    updated_task={}
+    with open(filename, 'w') as file:
+        for number, task in sorted(tasks.items()):
+            updated_task[task_number]=task
+            file.write(f'{task_number}:{task}')
+            task_number+=1
+        tasks.clear()
+        tasks.update(updated_task)
+        print(f'The file {filename} has been saved successfully!')
+
 def load_from_file(filename='task.txt'):
     tasks.clear()
     global task_number
