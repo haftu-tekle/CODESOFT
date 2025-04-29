@@ -6,16 +6,34 @@ def save_to_file(filename='task.txt'):
     global task_number
     updated_task={}
     with open(filename, 'w') as file:
-        for number, task in sorted(tasks.items()):
+        for num_str, task in sorted(tasks.items()):
             updated_task[task_number]=task
             file.write(f'{task_number}:{task}')
-            task_number+=1
-        tasks.clear()
-        tasks.update(updated_task)
-        print(f'The file {filename} has been saved successfully!')
-def load_from_file(filename='task.txt'):
-    task.c
+            task_number+=1       
+    tasks.clear()
+    tasks.update(updated_task)
+  
 
+def load_from_file(filename='task.txt'):
+    tasks.clear()
+    global task_number
+    try:
+        with open(filename, 'r') as file:
+            for line in file:
+                try:
+                    num_str, task=line.strip().split(':',1)
+                    number=int(num_str)
+                    tasks[number]=task
+                    if number>=task_number:
+                        task_number+=1
+                except ValueError:
+                    print(f'The line {line.strip()} has invalid values')
+    except FileNotFoundError:
+        print(f'The file named {filename} can not be found')
+    except Exception as e:
+        print(f'Invalid valid encountered {e}')
+
+    
 def delete_from_file(task_number_to_be_deleted, filename='task.txt'):
     update_tasks={}
     global task_number
